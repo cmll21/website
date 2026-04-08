@@ -4,16 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Jacob Ng</title>
-    <meta name="description" content="The personal website of Jacob Ng." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Space+Mono:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Space+Mono&display=swap"
       rel="stylesheet"
     />
     <style>
       *, *::before, *::after { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; }
+      html, body { margin: 0; padding: 0; height: 100%; }
 
       body {
         background: #fff;
@@ -27,51 +26,25 @@
       .page {
         min-height: 100vh;
         display: grid;
-        grid-template-rows: auto 1fr auto;
-        padding: clamp(24px, 5vw, 56px);
-      }
-
-      /* ── header ── */
-      .hd {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        padding-bottom: 18px;
-        border-bottom: 1.5px solid #000;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-      }
-
-      .hd-mark { font-weight: bold; }
-
-      .hd-nav {
-        display: flex;
-        gap: 32px;
+        grid-template-rows: 1fr auto;
+        padding: clamp(24px, 5vw, 52px);
       }
 
       /* ── main ── */
       .main {
-        padding: clamp(48px, 10vw, 140px) 0 clamp(48px, 8vw, 100px);
         display: flex;
         flex-direction: column;
-        justify-content: center;
-      }
-
-      .kicker {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        margin: 0 0 clamp(20px, 4vw, 48px);
+        justify-content: flex-end;
+        padding-bottom: clamp(28px, 5vw, 56px);
       }
 
       h1 {
         font-family: "Playfair Display", serif;
-        font-size: clamp(64px, 15vw, 200px);
+        font-size: clamp(72px, 16vw, 220px);
         font-weight: 900;
-        line-height: 0.86;
+        line-height: 0.85;
         letter-spacing: -0.03em;
-        margin: 0 0 clamp(32px, 6vw, 80px);
+        margin: 0;
       }
 
       h1 i {
@@ -79,90 +52,41 @@
         font-style: italic;
       }
 
-      .desc-row {
-        display: flex;
-        gap: clamp(24px, 4vw, 64px);
-        align-items: flex-start;
-        border-top: 1px solid #000;
-        padding-top: clamp(20px, 3vw, 36px);
-      }
-
-      .desc-label {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        flex-shrink: 0;
-        padding-top: 5px;
-        min-width: 72px;
-      }
-
-      .desc-body {
-        font-family: "Playfair Display", serif;
-        font-style: italic;
-        font-size: clamp(16px, 2.2vw, 24px);
-        line-height: 1.55;
-        max-width: 520px;
-        margin: 0;
-      }
-
       /* ── footer ── */
       .ft {
-        border-top: 1.5px solid #000;
-        padding-top: 18px;
+        border-top: 1px solid #000;
+        padding-top: 16px;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
         font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 0.14em;
+        letter-spacing: 0.13em;
       }
 
       .ft-links {
         display: flex;
-        gap: 32px;
+        gap: 28px;
       }
 
-      @media (max-width: 580px) {
-        .hd-nav { gap: 20px; }
-        .ft { flex-direction: column; gap: 12px; }
-        .ft-links { gap: 20px; }
-        .desc-row { flex-direction: column; gap: 12px; }
+      @media (max-width: 480px) {
+        .ft { flex-direction: column; gap: 10px; }
+        .ft-links { gap: 18px; }
       }
     </style>
   </head>
   <body>
     <div class="page">
 
-      <header class="hd">
-        <span class="hd-mark">Jacob Ng</span>
-        <nav class="hd-nav">
-          <a href="https://github.com/cmll21">GitHub</a>
-          <a href="mailto:jacob@jacob.ng">Mail</a>
-        </nav>
-      </header>
-
       <main class="main">
-        <p class="kicker">Software &amp; Design</p>
-        <h1>
-          Quietly<br>
-          <i>sharp</i><br>
-          digital<br>
-          work.
-        </h1>
-        <div class="desc-row">
-          <span class="desc-label">About</span>
-          <p class="desc-body">
-            I build thoughtful software, useful interfaces, and small tools
-            that feel calm, fast, and intentional.
-          </p>
-        </div>
+        <h1>Jacob<br><i>Ng.</i></h1>
       </main>
 
       <footer class="ft">
-        <span>© 2026</span>
+        <span>jacob@jacob.ng</span>
         <div class="ft-links">
-          <a href="mailto:jacob@jacob.ng">jacob@jacob.ng</a>
-          <a href="https://github.com/cmll21">GitHub ↗</a>
+          <a href="mailto:jacob@jacob.ng">Mail</a>
+          <a href="https://github.com/cmll21">GitHub</a>
         </div>
       </footer>
 
