@@ -412,7 +412,7 @@
           "Available commands:",
           "about: whoami, education, work, projects, skills",
           "links: github, linkedin, email",
-          "system: help, clear, date, pwd",
+          "system: help, clear, date, pwd, history",
         ],
         whoami: [
           "Jacob Ng.",
@@ -508,6 +508,11 @@
 
         if (command === "date") {
           printResponse([new Date().toLocaleString()]);
+          return;
+        }
+
+        if (command === "history") {
+          printResponse(history.map((entry, index) => `${index + 1}  ${escapeHtml(entry)}`));
           return;
         }
 
