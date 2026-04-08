@@ -410,15 +410,9 @@
       const commands = {
         help: [
           "Available commands:",
-          "whoami    - short intro",
-          "github    - print GitHub link",
-          "linkedin  - print LinkedIn link",
-          "email     - print email link",
-          "education - study background",
-          "work      - work and leadership",
-          "projects  - selected work",
-          "skills    - technical toolkit",
-          "clear     - clear the terminal",
+          "about: whoami, education, work, projects, skills",
+          "links: github, linkedin, email",
+          "system: help, clear, date, pwd",
         ],
         whoami: [
           "Jacob Ng.",
@@ -455,6 +449,9 @@
           "Skills:",
           "C++, Python, Rust, OCaml, TypeScript.",
           "Low-latency systems, asynchronous networking, ML/data tooling.",
+        ],
+        pwd: [
+          "/home/jacob",
         ],
       };
 
@@ -506,6 +503,11 @@
         if (command === "clear") {
           output.innerHTML = "";
           output.scrollTop = 0;
+          return;
+        }
+
+        if (command === "date") {
+          printResponse([new Date().toLocaleString()]);
           return;
         }
 
