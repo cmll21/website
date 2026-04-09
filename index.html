@@ -410,9 +410,9 @@
       const commands = {
         help: [
           "Available commands:",
-          "about: whoami, education, work, projects, skills",
-          "links: github, linkedin, email",
-          "system: help, clear, date, pwd, history",
+          "about: education, experience, projects, skills, whoami",
+          "links: email, github, linkedin",
+          "system: cat <file>, clear, date, help, history, ls, pwd",
         ],
         whoami: [
           "Jacob Ng.",
@@ -455,16 +455,17 @@
         ],
       };
 
-      const aliases = {
-        about: "whoami",
-        contact: "email",
-        cv: "experience",
-        mail: "email",
-        repo: "github",
-        repos: "github",
-        work: "experience",
-        ls: "help",
-        "?": "help",
+      const files = {
+        "about.txt": commands.whoami,
+        "education.txt": commands.education,
+        "experience.txt": commands.experience,
+        "projects.txt": commands.projects,
+        "skills.txt": commands.skills,
+        "contact.txt": [
+          'Email: <a href="mailto:jacob@jacob.ng">jacob@jacob.ng</a>',
+          'GitHub: <a href="https://github.com/cmll21" target="_blank" rel="noreferrer">github.com/cmll21</a>',
+          'LinkedIn: <a href="https://linkedin.com/in/ng-jacob" target="_blank" rel="noreferrer">linkedin.com/in/ng-jacob</a>',
+        ],
       };
 
       const history = [];
@@ -498,7 +499,7 @@
         history.push(trimmed);
         historyIndex = history.length;
 
-        const command = aliases[trimmed.toLowerCase()] || trimmed.toLowerCase();
+        const command = trimmed.toLowerCase();
 
         if (command === "clear") {
           output.innerHTML = "";
@@ -511,8 +512,40 @@
           return;
         }
 
+        if (command === "ls") {
+          printResponse([
+            "about.txt  contact.txt  education.txt",
+            "experience.txt  projects.txt  skills.txt",
+          ]);
+          return;
+        }
+
         if (command === "history") {
           printResponse(history.map((entry, index) => `${index + 1}  ${escapeHtml(entry)}`));
+          return;
+        }
+
+        if (command.startsWith("cat")) {
+          const parts = trimmed.split(/\s+/);
+
+          if (parts.length === 1) {
+            appendLine("cat: missing file operand", "error");
+            return;
+          }
+
+          if (parts.length > 2) {
+            appendLine(`cat: ${escapeHtml(trimmed)}: unsupported usage`, "error");
+            return;
+          }
+
+          const filename = parts[1];
+
+          if (files[filename]) {
+            printResponse(files[filename]);
+            return;
+          }
+
+          appendLine(`cat: ${escapeHtml(filename)}: No such file or directory`, "error");
           return;
         }
 
