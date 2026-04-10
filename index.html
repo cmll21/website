@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,400&family=Space+Mono&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -49,6 +49,7 @@
         --accent-2: #fab387;
         --danger: #f38ba8;
         --shadow: rgba(0, 0, 0, 0.58);
+        --display-font: "Space Grotesk", sans-serif;
       }
 
       html,
@@ -168,10 +169,11 @@
         max-width: 720px;
         margin: 0;
         color: var(--text);
-        font-family: "Playfair Display", serif;
+        font-family: var(--display-font);
         font-size: 64px;
         line-height: 1;
-        font-weight: 900;
+        font-weight: 700;
+        letter-spacing: -0.03em;
       }
 
       .kicker {
