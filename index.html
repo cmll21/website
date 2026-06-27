@@ -23,272 +23,215 @@
       content="Portfolio shell for Jacob Ng featuring projects, experience, and links."
     />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Space+Mono&display=swap"
-      rel="stylesheet"
-    />
     <style>
       *, *::before, *::after {
         box-sizing: border-box;
-      }
-
-      :root {
-        color-scheme: dark;
-        --bg: #11111b;
-        --panel: #1e1e2e;
-        --panel-2: #181825;
-        --panel-3: #313244;
-        --line: #313244;
-        --line-strong: #45475a;
-        --text: #cdd6f4;
-        --muted: #a6adc8;
-        --soft: #bac2de;
-        --accent: #a6e3a1;
-        --blue: #89b4fa;
-        --accent-2: #fab387;
-        --danger: #f38ba8;
-        --shadow: rgba(0, 0, 0, 0.58);
-        --display-font: "Space Grotesk", sans-serif;
-      }
-
-      html,
-      body {
-        min-height: 100%;
         margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        height: 100%;
+        image-rendering: pixelated;
+        font-family: 'Monaco', 'Courier New', monospace;
+        -webkit-font-smoothing: none;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
       }
 
       body {
-        background: linear-gradient(135deg, #11111b 0%, #181825 48%, #11111b 100%);
-        color: var(--text);
-        font-family: "Space Mono", monospace;
+        background-color: #fff;
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='2' height='2'><rect width='1' height='1' x='0' y='0' fill='%23000'/><rect width='1' height='1' x='1' y='1' fill='%23000'/></svg>");
+        background-size: 2px 2px;
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
       }
 
-      ::selection {
-        background: rgba(166, 227, 161, 0.28);
-        color: var(--text);
+      .window {
+        background: #fff;
+        border: 2px solid #000;
+        box-shadow: 4px 4px 0 #000;
+        width: 440px;
+        max-width: calc(100vw - 24px);
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        left: 100px;
+        top: 80px;
+        cursor: default;
+        user-select: none;
       }
 
-      a {
-        color: var(--blue);
+      .titlebar {
+        background: repeating-linear-gradient(
+          90deg, #000 0px, #000 1px, #fff 1px, #fff 2px
+        );
+        border-bottom: 2px solid #000;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        flex-shrink: 0;
+        cursor: move;
+      }
+
+      .title-text {
+        background: #fff;
+        padding: 0 12px;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: 'Geneva', system-ui, sans-serif;
+        line-height: 20px;
+        pointer-events: none;
+      }
+
+      .closebox {
+        position: absolute;
+        left: 6px;
+        top: 4px;
+        width: 13px;
+        height: 13px;
+        border: 2px solid #000;
+        background: #fff;
+        cursor: pointer;
+      }
+
+      .window-body {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .content {
+        flex: 1;
+        padding: 22px 22px 26px;
+        font: 400 12px/1.85 'Monaco', 'Courier New', monospace;
+        color: #000;
+        -webkit-font-smoothing: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: calc(100vh - 160px);
+        user-select: text;
+        cursor: text;
+      }
+
+      .content a {
+        color: #000;
         text-decoration: none;
       }
 
-      a:hover,
-      a:focus {
+      .content a:hover {
         text-decoration: underline;
       }
 
-      a:focus-visible {
-        outline: 1px solid rgba(137, 180, 250, 0.72);
-        outline-offset: 3px;
+      .login-line {
+        margin-bottom: 16px;
+        color: #888;
       }
 
-      .page {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 48px;
+      .prompt-line {
+        margin-bottom: 16px;
       }
 
-      .shell {
-        width: min(1040px, 100%);
-        height: min(820px, calc(100vh - 96px));
-        min-height: 620px;
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr);
-        border: 1px solid rgba(166, 173, 200, 0.24);
-        border-radius: 8px;
-        background: rgba(10, 15, 20, 0.94);
-        box-shadow: 0 26px 90px var(--shadow);
-        overflow: hidden;
-      }
-
-      .chrome {
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        padding: 0 18px;
-        border-bottom: 1px solid rgba(166, 173, 200, 0.18);
-        background: var(--panel-2);
-      }
-
-      .lights {
-        display: flex;
-        gap: 8px;
-      }
-
-      .light {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background: var(--muted);
-        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.24);
-      }
-
-      .light:nth-child(1) {
-        background: #ff6b6b;
-      }
-
-      .light:nth-child(2) {
-        background: #f6c177;
-      }
-
-      .light:nth-child(3) {
-        background: var(--accent);
-      }
-
-      .title {
-        color: var(--muted);
-        font-size: 13px;
-        line-height: 1;
-        white-space: nowrap;
-      }
-
-      .terminal {
-        min-height: 0;
-        display: grid;
-        grid-template-rows: auto minmax(0, 1fr) auto;
-        overflow: hidden;
-        background:
-          linear-gradient(rgba(205, 214, 244, 0.025) 1px, transparent 1px),
-          var(--panel);
-        background-size: 100% 28px;
-      }
-
-      .masthead {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 28px;
-        padding: 34px 36px 26px;
-        border-bottom: 1px solid rgba(166, 173, 200, 0.14);
-      }
-
-      h1 {
-        max-width: 720px;
-        margin: 0;
-        color: var(--text);
-        font-family: var(--display-font);
-        font-size: 64px;
-        line-height: 1;
+      .prompt-bold {
         font-weight: 700;
-        letter-spacing: -0.03em;
       }
 
-      .kicker {
-        margin: 12px 0 0;
-        max-width: 680px;
-        color: var(--soft);
-        font-size: 15px;
-        line-height: 1.8;
-      }
-
-      .status {
-        align-self: start;
-        min-width: 210px;
-        border-left: 1px solid rgba(166, 227, 161, 0.34);
-        padding: 2px 0 2px 18px;
-        color: var(--muted);
-        font-size: 12px;
-        line-height: 1.8;
-      }
-
-      .status strong {
-        display: block;
-        color: var(--accent);
+      .readme-name {
+        font-weight: 700;
         font-size: 13px;
-        font-weight: 400;
+        margin-bottom: 3px;
+      }
+
+      .readme-role {
+        color: #555;
+        margin-bottom: 20px;
+      }
+
+      .readme-links {
+        margin-bottom: 0;
+      }
+
+      .link-label {
+        color: #aaa;
       }
 
       .output {
-        min-height: 0;
-        padding: 28px 36px 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        scroll-behavior: smooth;
-        scrollbar-color: var(--line-strong) transparent;
-        scrollbar-width: thin;
+        margin-top: 16px;
       }
 
-      .output::-webkit-scrollbar {
-        width: 10px;
+      .output-line {
+        margin-bottom: 0;
+        line-height: 1.85;
       }
 
-      .output::-webkit-scrollbar-track {
-        background: transparent;
+      .output-line.cmd {
+        font-weight: 700;
       }
 
-      .output::-webkit-scrollbar-thumb {
-        background: rgba(166, 173, 200, 0.34);
-        border: 3px solid transparent;
-        border-radius: 8px;
-        background-clip: content-box;
+      .output-line.err {
+        color: #c00;
       }
 
-      .output::-webkit-scrollbar-thumb:hover {
-        background: rgba(137, 180, 250, 0.46);
-        background-clip: content-box;
+      .output-line.muted {
+        color: #888;
       }
 
-      .line {
-        margin: 0 0 12px;
-        color: var(--soft);
-        font-size: 15px;
-        line-height: 1.75;
-        overflow-wrap: anywhere;
+      .cursor-line {
+        margin-top: 18px;
+        display: flex;
+        align-items: baseline;
       }
 
-      .line.command {
-        color: var(--text);
+      .cursor {
+        display: inline-block;
+        width: 7px;
+        height: 13px;
+        background: #000;
+        vertical-align: middle;
+        animation: blink 1s step-end infinite;
+        margin-left: 2px;
       }
 
-      .line.error {
-        color: var(--danger);
+      .input-form {
+        display: flex;
+        align-items: baseline;
+        margin-top: 0;
       }
 
-      .line .prompt {
-        color: var(--accent);
-      }
-
-      .line .muted {
-        color: var(--muted);
-      }
-
-      .input-row {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: center;
-        gap: 10px;
-        padding: 18px 36px 32px;
-        border-top: 1px solid rgba(166, 173, 200, 0.14);
-        background: var(--panel);
-      }
-
-      .input-row label {
-        color: var(--accent);
-        font-size: 15px;
-        line-height: 1.4;
+      .input-prompt {
+        font-weight: 700;
         white-space: nowrap;
+        margin-right: 4px;
       }
 
-      #terminal-input {
-        width: 100%;
+      .terminal-input {
+        flex: 1;
         border: 0;
         outline: 0;
         appearance: none;
-        border-radius: 0;
-        padding: 0;
         background: transparent;
-        color: var(--text);
-        caret-color: var(--accent-2);
+        color: #000;
+        caret-color: #000;
         font: inherit;
-        font-size: 15px;
+        font-size: 12px;
+        line-height: 1.85;
+        -webkit-font-smoothing: none;
+        padding: 0;
       }
 
-      #terminal-input::placeholder {
-        color: #657485;
+      .scrollbar {
+        width: 15px;
+        border-left: 2px solid #000;
+        background: repeating-linear-gradient(
+          45deg, #000 0px, #000 1px, #fff 1px, #fff 4px
+        );
+        flex-shrink: 0;
       }
 
       .sr-only {
@@ -303,132 +246,90 @@
         border: 0;
       }
 
-      @media (max-width: 760px) {
-        .page {
-          padding: 18px;
-          place-items: stretch;
+      @media (max-width: 500px) {
+        .window {
+          left: 12px !important;
+          top: 40px !important;
+          width: calc(100vw - 24px);
         }
 
-        .shell {
-          height: calc(100svh - 36px);
-          min-height: 0;
-        }
-
-        .terminal {
-          min-height: 0;
-        }
-
-        .masthead {
-          grid-template-columns: 1fr;
-          gap: 20px;
-          padding: 28px 22px 22px;
-        }
-
-        h1 {
-          font-size: 48px;
-          line-height: 1.05;
-        }
-
-        .kicker,
-        .line,
-        .input-row label,
-        #terminal-input {
-          font-size: 14px;
-        }
-
-        .status {
-          min-width: 0;
-          width: 100%;
-        }
-
-        .output {
-          padding: 22px 22px 0;
-        }
-
-        .input-row {
-          padding: 16px 22px 24px;
-        }
-      }
-
-      @media (max-width: 420px) {
-        .chrome {
-          gap: 12px;
-          padding: 0 14px;
-        }
-
-        .title {
-          font-size: 11px;
-        }
-
-        h1 {
-          font-size: 38px;
-          line-height: 1.08;
-        }
-
-        .input-row {
-          grid-template-columns: 1fr;
-          gap: 8px;
+        .content {
+          max-height: calc(100vh - 120px);
+          padding: 16px 16px 20px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="page">
-      <main class="shell" aria-label="Jacob Ng terminal profile">
-        <div class="chrome" aria-hidden="true">
-          <div class="lights">
-            <span class="light"></span>
-            <span class="light"></span>
-            <span class="light"></span>
-          </div>
-          <div class="title">jacob.ng - terminal profile</div>
-        </div>
-
-        <section class="terminal" id="terminal">
-          <div class="masthead">
-            <div>
-              <h1>Jacob Ng.</h1>
-              <p class="kicker">
-                Ask the shell about me. Start with
-                <a href="#terminal-input" data-command="help">help</a>, then try
-                <a href="#terminal-input" data-command="whoami">whoami</a> or
-                <a href="#terminal-input" data-command="projects">projects</a>.
-              </p>
-            </div>
-
-            <aside class="status" aria-label="Profile status">
-              <strong>status: online</strong>
-              location: jacob.ng<br />
-              mode: portfolio shell<br />
-              contact: hi@jacob.ng
-            </aside>
+    <main class="window" id="window" aria-label="Jacob Ng terminal profile">
+      <div class="titlebar" id="titlebar">
+        <div class="closebox" aria-hidden="true"></div>
+        <span class="title-text">jacob.ng — README</span>
+      </div>
+      <div class="window-body">
+        <div class="content" id="content">
+          <div class="login-line" id="login-line">Last login: <span id="login-date"></span> on ttys001</div>
+          <div class="prompt-line"><span class="prompt-bold">jacob@jacob.ng:~$</span> cat README</div>
+          <div class="readme-name">Jacob Ng</div>
+          <div class="readme-role">software engineer.</div>
+          <div class="readme-links">
+            <span class="link-label">email&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="mailto:hi@jacob.ng">hi@jacob.ng</a><br>
+            <span class="link-label">linkedin&nbsp;</span><a href="https://linkedin.com/in/ng-jacob" target="_blank" rel="noopener noreferrer">linkedin.com/in/ng-jacob</a>
           </div>
 
           <div class="output" id="output" aria-live="polite"></div>
 
-          <form class="input-row" id="terminal-form" autocomplete="off">
-            <label for="terminal-input">visitor@jacob.ng:~$</label>
-            <span class="sr-only">Enter a profile command</span>
-            <input
-              id="terminal-input"
-              name="command"
-              type="text"
-              spellcheck="false"
-              autocapitalize="off"
-              placeholder="help"
-              autofocus
-            />
-          </form>
-        </section>
-      </main>
-    </div>
+          <div class="cursor-line" id="cursor-line">
+            <form class="input-form" id="terminal-form" autocomplete="off">
+              <span class="prompt-bold input-prompt">jacob@jacob.ng:~$</span>
+              <span class="sr-only">Enter a command</span>
+              <input
+                id="terminal-input"
+                class="terminal-input"
+                name="command"
+                type="text"
+                spellcheck="false"
+                autocapitalize="off"
+                autofocus
+              />
+            </form>
+          </div>
+        </div>
+        <div class="scrollbar" aria-hidden="true"></div>
+      </div>
+    </main>
 
     <script>
-      const output = document.querySelector("#output");
-      const terminal = document.querySelector("#terminal");
-      const form = document.querySelector("#terminal-form");
-      const input = document.querySelector("#terminal-input");
-      const commandLinks = document.querySelectorAll("[data-command]");
+      // Set login date
+      document.getElementById('login-date').textContent = new Date().toDateString().replace(/^\w+\s/, d => d) + ' ' +
+        new Date().toLocaleTimeString('en-US', { hour12: false }) + ' ' + new Date().toDateString().split(' ')[0];
+
+      // Drag
+      const win = document.getElementById('window');
+      const titlebar = document.getElementById('titlebar');
+      let dragging = false, ox = 0, oy = 0;
+
+      titlebar.addEventListener('mousedown', e => {
+        if (e.target.classList.contains('closebox')) return;
+        dragging = true;
+        ox = e.clientX - win.offsetLeft;
+        oy = e.clientY - win.offsetTop;
+        e.preventDefault();
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        win.style.left = (e.clientX - ox) + 'px';
+        win.style.top = (e.clientY - oy) + 'px';
+      });
+
+      document.addEventListener('mouseup', () => { dragging = false; });
+
+      // Terminal
+      const output = document.getElementById('output');
+      const form = document.getElementById('terminal-form');
+      const input = document.getElementById('terminal-input');
+      const content = document.getElementById('content');
 
       const commands = {
         help: [
@@ -473,9 +374,7 @@
           "C++, Python, Rust, OCaml, TypeScript.",
           "Low-latency systems, asynchronous networking, ML/data tooling.",
         ],
-        pwd: [
-          "/home/jacob",
-        ],
+        pwd: ["/home/jacob"],
       };
 
       const files = {
@@ -491,149 +390,83 @@
         ],
       };
 
-      const history = [];
+      const cmdHistory = [];
       let historyIndex = 0;
 
-      function appendLine(content, className = "") {
-        const line = document.createElement("p");
-        line.className = ["line", className].filter(Boolean).join(" ");
-        line.innerHTML = content;
-        output.appendChild(line);
-        scrollOutputToBottom();
+      function escapeHtml(v) {
+        return v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
       }
 
-      function printResponse(lines) {
-        lines.forEach((line) => appendLine(line));
+      function appendLine(html, cls) {
+        const p = document.createElement('p');
+        p.className = 'output-line' + (cls ? ' ' + cls : '');
+        p.innerHTML = html;
+        output.appendChild(p);
+        requestAnimationFrame(() => { content.scrollTop = content.scrollHeight; });
       }
 
-      function scrollOutputToBottom() {
-        requestAnimationFrame(() => {
-          output.scrollTop = output.scrollHeight;
-        });
-      }
+      function runCommand(raw) {
+        const trimmed = raw.trim();
+        if (!trimmed) return;
 
-      function runCommand(rawCommand) {
-        const trimmed = rawCommand.trim();
-        if (!trimmed) {
+        appendLine('<span class="prompt-bold">jacob@jacob.ng:~$</span> ' + escapeHtml(trimmed), 'cmd');
+        cmdHistory.push(trimmed);
+        historyIndex = cmdHistory.length;
+
+        const cmd = trimmed.toLowerCase();
+
+        if (cmd === 'clear') {
+          output.innerHTML = '';
           return;
         }
-
-        appendLine(`<span class="prompt">visitor@jacob.ng:~$</span> ${escapeHtml(trimmed)}`, "command");
-        history.push(trimmed);
-        historyIndex = history.length;
-
-        const command = trimmed.toLowerCase();
-
-        if (command === "clear") {
-          output.innerHTML = "";
-          output.scrollTop = 0;
+        if (cmd === 'date') {
+          appendLine(new Date().toLocaleString());
           return;
         }
-
-        if (command === "date") {
-          printResponse([new Date().toLocaleString()]);
+        if (cmd === 'ls') {
+          appendLine('about.txt&nbsp;&nbsp;contact.txt&nbsp;&nbsp;education.txt');
+          appendLine('experience.txt&nbsp;&nbsp;projects.txt&nbsp;&nbsp;skills.txt');
           return;
         }
-
-        if (command === "ls") {
-          printResponse([
-            "about.txt  contact.txt  education.txt",
-            "experience.txt  projects.txt  skills.txt",
-          ]);
+        if (cmd === 'history') {
+          cmdHistory.forEach((e, i) => appendLine((i + 1) + '  ' + escapeHtml(e)));
           return;
         }
-
-        if (command === "history") {
-          printResponse(history.map((entry, index) => `${index + 1}  ${escapeHtml(entry)}`));
-          return;
-        }
-
-        if (command.startsWith("cat")) {
+        if (cmd.startsWith('cat')) {
           const parts = trimmed.split(/\s+/);
-
-          if (parts.length === 1) {
-            appendLine("cat: missing file operand", "error");
-            return;
-          }
-
-          if (parts.length > 2) {
-            appendLine(`cat: ${escapeHtml(trimmed)}: unsupported usage`, "error");
-            return;
-          }
-
-          const filename = parts[1];
-
-          if (files[filename]) {
-            printResponse(files[filename]);
-            return;
-          }
-
-          appendLine(`cat: ${escapeHtml(filename)}: No such file or directory`, "error");
+          if (parts.length === 1) { appendLine('cat: missing file operand', 'err'); return; }
+          if (parts.length > 2) { appendLine('cat: ' + escapeHtml(trimmed) + ': unsupported usage', 'err'); return; }
+          const fn = parts[1];
+          if (files[fn]) { files[fn].forEach(l => appendLine(l)); return; }
+          appendLine('cat: ' + escapeHtml(fn) + ': No such file or directory', 'err');
           return;
         }
-
-        if (commands[command]) {
-          printResponse(commands[command]);
+        if (commands[cmd]) {
+          commands[cmd].forEach(l => appendLine(l));
           return;
         }
-
-        appendLine(
-          `Command not found: ${escapeHtml(trimmed)}. Try <span class="muted">help</span>.`,
-          "error"
-        );
+        appendLine('Command not found: ' + escapeHtml(trimmed) + '. Try <span style="color:#888">help</span>.', 'err');
       }
 
-      function escapeHtml(value) {
-        return value
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
+      form.addEventListener('submit', e => {
+        e.preventDefault();
         runCommand(input.value);
-        input.value = "";
+        input.value = '';
       });
 
-      input.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowUp") {
-          event.preventDefault();
-          if (historyIndex > 0) {
-            historyIndex -= 1;
-            input.value = history[historyIndex];
-          }
+      input.addEventListener('keydown', e => {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (historyIndex > 0) { historyIndex--; input.value = cmdHistory[historyIndex]; }
         }
-
-        if (event.key === "ArrowDown") {
-          event.preventDefault();
-          if (historyIndex < history.length - 1) {
-            historyIndex += 1;
-            input.value = history[historyIndex];
-          } else {
-            historyIndex = history.length;
-            input.value = "";
-          }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (historyIndex < cmdHistory.length - 1) { historyIndex++; input.value = cmdHistory[historyIndex]; }
+          else { historyIndex = cmdHistory.length; input.value = ''; }
         }
       });
 
-      terminal.addEventListener("click", () => input.focus());
-
-      commandLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-          event.preventDefault();
-          input.focus();
-          runCommand(link.dataset.command);
-          input.value = "";
-        });
-      });
-
-      printResponse([
-        "Welcome. Try <span class=\"muted\">help</span> for available commands.",
-        "Tip: commands are local to this page. No prompt leaves your browser.",
-      ]);
+      content.addEventListener('click', () => input.focus());
     </script>
   </body>
 </html>
