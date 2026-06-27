@@ -1,32 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
-  <!-- Window background -->
-  <rect width="64" height="64" fill="#fff" stroke="#000" stroke-width="3"/>
-  <!-- Title bar pinstripe -->
-  <rect x="1.5" y="1.5" width="61" height="14" fill="url(#stripe)"/>
-  <!-- Title bar bottom border -->
-  <rect x="0" y="14" width="64" height="2" fill="#000"/>
-  <!-- Title pill background -->
-  <rect x="16" y="3" width="32" height="10" fill="#fff"/>
-  <!-- Closebox -->
-  <rect x="5" y="4" width="9" height="9" fill="#fff" stroke="#000" stroke-width="1.5"/>
-  <!-- Scrollbar right -->
-  <rect x="49" y="16" width="15" height="48" fill="url(#hatch)"/>
-  <rect x="49" y="16" width="2" height="48" fill="#000"/>
-  <!-- Content lines (terminal text suggestion) -->
-  <rect x="6" y="22" width="38" height="2" fill="#888" rx="0"/>
-  <rect x="6" y="29" width="30" height="2" fill="#000" rx="0"/>
-  <rect x="6" y="36" width="22" height="2.5" fill="#000" rx="0"/>
-  <rect x="6" y="42" width="16" height="1.5" fill="#aaa" rx="0"/>
-  <rect x="6" y="50" width="8" height="2" fill="#000" rx="0"/>
-  <rect x="15" y="50" width="5" height="10" fill="#000" rx="0"/>
   <defs>
     <pattern id="stripe" x="0" y="0" width="2" height="1" patternUnits="userSpaceOnUse">
       <rect width="1" height="1" fill="#000"/>
       <rect x="1" width="1" height="1" fill="#fff"/>
     </pattern>
-    <pattern id="hatch" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse">
-      <rect width="4" height="4" fill="#fff"/>
-      <line x1="0" y1="4" x2="4" y2="0" stroke="#000" stroke-width="1"/>
-    </pattern>
   </defs>
+  <!-- Window -->
+  <rect width="64" height="64" fill="#fff"/>
+  <rect width="64" height="64" fill="none" stroke="#000" stroke-width="3"/>
+  <!-- Title bar -->
+  <rect x="1.5" y="1.5" width="61" height="14" fill="url(#stripe)"/>
+  <rect x="0" y="14" width="64" height="2" fill="#000"/>
+  <!-- Close box -->
+  <rect x="5" y="4" width="9" height="9" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  <!-- j -->
+  <text x="32" y="52" font-family="Monaco, 'Courier New', monospace" font-size="34" font-weight="700" text-anchor="middle" fill="#000" style="-webkit-font-smoothing:none">j</text>
 </svg>
