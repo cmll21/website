@@ -269,11 +269,11 @@
       <div class="window-body">
         <div class="content" id="content">
           <div class="login-line" id="login-line">Last login: <span id="login-date"></span> on ttys001</div>
-          <div class="prompt-line"><span class="prompt-bold">jacob@jacob.ng:~$</span> cat README</div>
+          <div class="prompt-line"><span class="prompt-bold">web@jacob.ng:~$</span> cat README</div>
           <div class="readme-name">Jacob Ng</div>
           <div class="readme-role">software engineer.</div>
           <div class="readme-links">
-            <span class="link-label">email&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="mailto:hi@jacob.ng">hi@jacob.ng</a><br>
+            <span class="link-label">email&nbsp;&nbsp;&nbsp;&nbsp;</span><a href="mailto:mail@jacob.ng">mail@jacob.ng</a><br>
             <span class="link-label">linkedin&nbsp;</span><a href="https://linkedin.com/in/ng-jacob" target="_blank" rel="noopener noreferrer">linkedin.com/in/ng-jacob</a>
           </div>
 
@@ -281,7 +281,7 @@
 
           <div class="cursor-line" id="cursor-line">
             <form class="input-form" id="terminal-form" autocomplete="off">
-              <span class="prompt-bold input-prompt">jacob@jacob.ng:~$</span>
+              <span class="prompt-bold input-prompt">web@jacob.ng:~$</span>
               <span class="sr-only">Enter a command</span>
               <input
                 id="terminal-input"
@@ -349,7 +349,7 @@
           'LinkedIn: <a href="https://linkedin.com/in/ng-jacob" target="_blank" rel="noopener noreferrer">linkedin.com/in/ng-jacob</a>',
         ],
         email: [
-          'Email: <a href="mailto:hi@jacob.ng">hi@jacob.ng</a>',
+          'Email: <a href="mailto:mail@jacob.ng">mail@jacob.ng</a>',
         ],
         education: [
           "Education:",
@@ -384,7 +384,7 @@
         "projects.txt": commands.projects,
         "skills.txt": commands.skills,
         "contact.txt": [
-          'Email: <a href="mailto:hi@jacob.ng">hi@jacob.ng</a>',
+          'Email: <a href="mailto:mail@jacob.ng">mail@jacob.ng</a>',
           'GitHub: <a href="https://github.com/cmll21" target="_blank" rel="noopener noreferrer">github.com/cmll21</a>',
           'LinkedIn: <a href="https://linkedin.com/in/ng-jacob" target="_blank" rel="noopener noreferrer">linkedin.com/in/ng-jacob</a>',
         ],
@@ -409,7 +409,7 @@
         const trimmed = raw.trim();
         if (!trimmed) return;
 
-        appendLine('<span class="prompt-bold">jacob@jacob.ng:~$</span> ' + escapeHtml(trimmed), 'cmd');
+        appendLine('<span class="prompt-bold">web@jacob.ng:~$</span> ' + escapeHtml(trimmed), 'cmd');
         cmdHistory.push(trimmed);
         historyIndex = cmdHistory.length;
 
